@@ -1,20 +1,3 @@
-<!-- <script setup>
-import Hero from '../components/Hero.vue';
-</script>
-<template>
-  <Hero />
-</template> -->
-<!-- <template>
-  <div class="my-4">
-    <ul>
-      <li v-for="country in countries" :key="country.name">
-        {{ country.name.common }}
-        {{ country.image}}
-      </li>
-    </ul>
-    <button @click="loadMore" class="py-2 px-7 bg-green-400 text-white mt-5">Load More</button>
-  </div>
-</template> -->
 <template>
   <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
     <div v-for="country in countries" :key="country.name.common">
@@ -53,12 +36,8 @@ import Hero from '../components/Hero.vue';
 
 <script>
 import { ref, onMounted } from 'vue';
-import { TheCard } from 'flowbite-vue';
 
 export default {
-  components: {
-    TheCard,
-  },
   setup() {
     const countries = ref([]);
     const currentPage = ref(1);
