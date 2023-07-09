@@ -14,22 +14,23 @@
           </a>
           <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
             acquisitions of 2021 so far, in reverse chronological order.</p>
-          <a href="#"
-            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Read more
+          <router-link :to="`/country/${country.ccn3}`" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg
+            hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700
+            dark:focus:ring-blue-800">
+            View Country
             <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
               viewBox="0 0 14 10">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M1 5h12m0 0L9 1m4 4L9 9" />
             </svg>
-          </a>
+          </router-link>
         </div>
       </div>
 
     </div>
-    <div>
+    <!-- <div>
       <button @click="loadMore" class="py-2 px-7 bg-green-400 text-white mt-5">Load More</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -40,12 +41,9 @@ import { ref, onMounted } from 'vue';
 export default {
   setup() {
     const countries = ref([]);
-    const currentPage = ref(1);
-    const perPage = ref(10);
 
     const fetchCountries = async () => {
-      const start = (currentPage.value - 1) * perPage.value;
-      const url = `https://restcountries.com/v3.1/all?start=${start}&limit=${perPage.value}`;
+      const url = "https://restcountries.com/v3.1/all";
 
       try {
         const response = await fetch(url);
@@ -56,16 +54,10 @@ export default {
       }
     };
 
-    const loadMore = async () => {
-      currentPage.value += 1;
-      await fetchCountries();
-    };
-
     onMounted(fetchCountries);
 
     return {
       countries,
-      loadMore,
     };
   },
 };
